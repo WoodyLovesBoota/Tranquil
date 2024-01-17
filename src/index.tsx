@@ -28,8 +28,8 @@ const GlobalStyle = createGlobalStyle`
     font-weight: 300;
     line-height: 1.2;
     vertical-align: baseline;
-    font-family: 'Apple SD Gothic Neo', Inter, sans-serif;
-    color: black;
+    font-family: 'Roboto', sans-serif;
+    color: white;
     box-sizing: border-box;
 
     @media screen and (max-width: 1000px) {

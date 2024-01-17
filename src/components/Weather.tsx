@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { useQuery } from "react-query";
-import { ILocationData, IWeatherData, fetchWeatherData } from "../api";
+import { ILocationData, IWeatherData, fetchCityData, fetchWeatherData } from "../api";
 import { useEffect, useState } from "react";
 import { useRecoilState } from "recoil";
 import { weatherState } from "../atoms";
@@ -23,7 +23,7 @@ const Weather = () => {
   };
 
   const { data, isLoading } = useQuery<IWeatherData>(
-    ["weatherData", locationData?.latitude],
+    ["weatherData", locationData],
     () => fetchWeatherData(locationData),
     { enabled: !!locationData }
   );
@@ -31,16 +31,28 @@ const Weather = () => {
   useEffect(() => {
     const getLoc = async () => {
       const loc = await getCurrentLocation();
-      loc && setLocationData(loc);
+      loc &&
+        setLocationData({
+          latitude: Number(
+            loc.latitude.toString().split(".")[0] +
+              "." +
+              loc.latitude.toString().split(".")[1].slice(0, 2)
+          ),
+          longitude: Number(
+            loc.longitude.toString().split(".")[0] +
+              "." +
+              loc.longitude.toString().split(".")[1].slice(0, 2)
+          ),
+        });
     };
     getLoc();
   }, []);
 
   useEffect(() => {
-    setWeather(data?.weather[0].main || "default");
+    data && setWeather(data?.weather.map((e) => e.id));
   }, [data]);
 
-  return <Wrapper>{isLoading ? "로딩중" : data?.weather[0].main}</Wrapper>;
+  return <Wrapper></Wrapper>;
 };
 
 export default Weather;
