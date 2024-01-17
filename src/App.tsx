@@ -4,6 +4,7 @@ import { useRecoilValue } from "recoil";
 import { weatherState } from "./atoms";
 import Header from "./components/Header";
 import SnowBg from "./components/backgrounds/SnovBg";
+import NavigationBar from "./components/NavigationBar";
 
 function App() {
   const weather = useRecoilValue(weatherState);
@@ -14,6 +15,7 @@ function App() {
       <Container>
         <Header />
         <Weather />
+        <NavigationBar />
       </Container>
     </Wrapper>
   );
