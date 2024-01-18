@@ -9,3 +9,13 @@ export const navState = atom({
   key: "NavigateRouter",
   default: 0,
 });
+
+export const timerState = atom({
+  key: "TimerStartTime",
+  default: 0,
+});
+
+export const timerRunningState = atom({
+  key: "TimerIsRunning",
+  default: false,
+});

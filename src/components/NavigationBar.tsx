@@ -50,6 +50,7 @@ const Wrapper = styled.div`
   position: fixed;
   left: 0;
   top: 0;
+  z-index: 3;
 `;
 
 const List = styled.div`
@@ -60,11 +61,11 @@ const List = styled.div`
 `;
 
 const Item = styled.h2<{ isnow: string }>`
-  font-size: ${(props) => (props.isnow === "true" ? 18 : 16)}px;
+  font-size: ${(props) => (props.isnow === "true" ? 16 : 12)}px;
   font-weight: ${(props) => (props.isnow === "true" ? 400 : 100)};
-  color: ${(props) => (props.isnow === "true" ? "white" : "gray")};
+  color: ${(props) => (props.isnow === "true" ? "white" : "white")};
   letter-spacing: 1px;
-  margin: 10px 0;
+  margin: 6px 0;
   cursor: pointer;
   transition: all 0.3s ease-in-out;
 `;

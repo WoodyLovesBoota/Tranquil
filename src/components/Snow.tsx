@@ -97,8 +97,8 @@ const falling = (translateX: number[]) => keyframes`
 
 const SnowBall = styled.div<{ translateX: number[]; starting: number; duration: number }>`
   background-color: white;
-  width: 10px;
-  height: 10px;
+  width: 6px;
+  height: 6px;
   border-radius: 100px;
   bottom: 100%;
   animation: ${(props) => falling(props.translateX)} ${(props) => props.duration}s linear infinite;

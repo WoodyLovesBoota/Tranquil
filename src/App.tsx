@@ -1,13 +1,32 @@
 import styled from "styled-components";
 import Weather from "./components/Weather";
-import { useRecoilValue } from "recoil";
-import { weatherState } from "./atoms";
+import { useRecoilState, useRecoilValue } from "recoil";
+import { navState, timerRunningState, timerState, weatherState } from "./atoms";
 import Header from "./components/Header";
 import SnowBg from "./components/backgrounds/SnovBg";
 import NavigationBar from "./components/NavigationBar";
+import Timer from "./components/Timer";
+import { useEffect } from "react";
 
 function App() {
   const weather = useRecoilValue(weatherState);
+  const [isNow, setIsNow] = useRecoilState(navState);
+  const [elapsedTime, setElapsedTime] = useRecoilState(timerState);
+  const [isRunning, setIsRunning] = useRecoilState(timerRunningState);
+
+  useEffect(() => {
+    let intervalId: NodeJS.Timeout | null = null;
+
+    if (isRunning) {
+      intervalId = setInterval(() => {
+        setElapsedTime((prevElapsedTime) => prevElapsedTime + 1);
+      }, 1000);
+    }
+
+    return () => {
+      if (intervalId) clearInterval(intervalId);
+    };
+  }, [isRunning]);
 
   return (
     <Wrapper weather={weather[0]}>
@@ -16,6 +35,7 @@ function App() {
         <Header />
         <Weather />
         <NavigationBar />
+        {isNow === 2 ? <Timer /> : null}
       </Container>
     </Wrapper>
   );
@@ -31,7 +51,7 @@ const Wrapper = styled.div<{ weather: number }>`
     props.weather === 100 && {
       backgroundColor: "#000000",
     }};
-  background-color: #2a2a2a;
+  background-color: #ff9000;
 `;
 
 const Container = styled.div`

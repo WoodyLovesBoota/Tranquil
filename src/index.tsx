@@ -25,7 +25,7 @@ const GlobalStyle = createGlobalStyle`
     padding: 0;
     border: 0;
     font-size: 16px;
-    font-weight: 300;
+    font-weight: 100;
     line-height: 1.2;
     vertical-align: baseline;
     font-family: 'Roboto', sans-serif;
