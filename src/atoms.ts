@@ -19,3 +19,8 @@ export const timerRunningState = atom({
   key: "TimerIsRunning",
   default: false,
 });
+
+export const tempState = atom({
+  key: "TemperatureInfo",
+  default: 15,
+});

@@ -62,7 +62,7 @@ const List = styled.div`
 
 const Item = styled.h2<{ isnow: string }>`
   font-size: ${(props) => (props.isnow === "true" ? 16 : 12)}px;
-  font-weight: ${(props) => (props.isnow === "true" ? 400 : 100)};
+  font-weight: ${(props) => (props.isnow === "true" ? 400 : 300)};
   color: ${(props) => (props.isnow === "true" ? "white" : "white")};
   letter-spacing: 1px;
   margin: 6px 0;

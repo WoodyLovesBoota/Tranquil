@@ -19,21 +19,28 @@ const Timer = () => {
     <Wrapper>
       <Container variants={timerVar} initial="initial" animate="animate">
         <TimerBox>
-          <TimerMin>
-            {Math.floor(elapsedTime / 60) < 10
-              ? "0" + Math.floor(elapsedTime / 60)
-              : Math.floor(elapsedTime / 60)}
-          </TimerMin>
-          <TimerSec>{elapsedTime % 60 < 10 ? "0" + (elapsedTime % 60) : elapsedTime % 60}</TimerSec>
+          <TimeRow>
+            min
+            <TimerMin>
+              {Math.floor(elapsedTime / 60) < 10 ? "0" + Math.floor(elapsedTime / 60) : Math.floor(elapsedTime / 60)}
+            </TimerMin>
+          </TimeRow>
+          <TimeRow>
+            <TimerSec>{elapsedTime % 60 < 10 ? "0" + (elapsedTime % 60) : elapsedTime % 60}</TimerSec>
+            sec
+          </TimeRow>
         </TimerBox>
         <Buttons>
-          <Button onClick={handleStart} disabled={isRunning}>
-            start
-          </Button>
-          <Button onClick={handleStop} disabled={!isRunning}>
-            stop
-          </Button>
-          <Button onClick={handleReset}>reset</Button>
+          {!isRunning ? (
+            <Button onClick={handleStart} disabled={isRunning}>
+              START
+            </Button>
+          ) : (
+            <Button onClick={handleStop} disabled={!isRunning}>
+              PAUSE
+            </Button>
+          )}
+          <Button onClick={handleReset}>RESET</Button>
         </Buttons>
       </Container>
     </Wrapper>
@@ -59,27 +66,35 @@ const Container = styled(motion.div)`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background: rgba(255, 255, 255, 0);
+  background: #9400006b;
   border-radius: 16px;
   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
   backdrop-filter: blur(3px);
-  padding: 100px 150px;
+  width: 400px;
+  height: 400px;
 `;
 
 const TimerBox = styled.div`
-  margin-bottom: 50px;
+  margin-top: auto;
 `;
 
 const TimerMin = styled.h2`
-  font-size: 48px;
-  font-weight: 100;
+  font-size: 60px;
+  font-weight: 300;
   letter-spacing: 5px;
   text-align: right;
 `;
 
+const TimeRow = styled.div`
+  display: flex;
+  align-items: flex-start;
+  font-weight: 400;
+  font-size: 12px;
+`;
+
 const TimerSec = styled.h2`
-  font-size: 48px;
-  font-weight: 100;
+  font-size: 60px;
+  font-weight: 300;
   letter-spacing: 5px;
   text-align: right;
 `;
@@ -87,12 +102,22 @@ const TimerSec = styled.h2`
 const Button = styled.button`
   color: white;
   background-color: transparent;
-  margin: 0 10px;
+  /* margin: 0 10px; */
   cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 12px;
+  font-weight: 400;
+  width: 50%;
 `;
 
 const Buttons = styled.div`
   display: flex;
+  width: 100%;
+  padding: 20px;
+  margin-top: auto;
+  justify-content: space-between;
 `;
 
 const timerVar = {

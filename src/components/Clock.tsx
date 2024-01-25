@@ -43,7 +43,7 @@ const Wrapper = styled.div`
 const Ampm = styled.h2`
   font-size: 16px;
   margin-right: 5px;
-  font-weight: 100;
+  font-weight: 300;
 `;
 
 const TimeBox = styled.div`
