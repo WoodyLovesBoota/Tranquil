@@ -1,11 +1,13 @@
 import { useEffect, useState } from "react";
 import styled from "styled-components";
 import { padInt } from "../utils";
+import { useRecoilState } from "recoil";
+import { isAmState } from "../atoms";
 
 const Clock = () => {
   const [hour, setHour] = useState(0);
   const [min, setMin] = useState(0);
-  const [isAm, setIsAm] = useState(false);
+  const [isAm, setIsAm] = useRecoilState(isAmState);
 
   useEffect(() => {
     setHour(new Date().getHours() <= 12 ? new Date().getHours() : new Date().getHours() - 12);

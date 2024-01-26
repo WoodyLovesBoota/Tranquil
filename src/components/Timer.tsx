@@ -1,7 +1,6 @@
 import { useRecoilState } from "recoil";
 import styled from "styled-components";
 import { timerRunningState, timerState } from "../atoms";
-import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 
 const Timer = () => {
@@ -66,7 +65,6 @@ const Container = styled(motion.div)`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background: #9400006b;
   border-radius: 16px;
   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
   backdrop-filter: blur(3px);

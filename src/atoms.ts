@@ -20,7 +20,17 @@ export const timerRunningState = atom({
   default: false,
 });
 
+export const isAmState = atom({
+  key: "IsAmNow",
+  default: false,
+});
+
 export const tempState = atom({
   key: "TemperatureInfo",
   default: 15,
+});
+
+export const todoState = atom<string[]>({
+  key: "TodoList",
+  default: [],
 });
