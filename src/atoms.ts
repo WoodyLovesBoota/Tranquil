@@ -30,7 +30,7 @@ export const tempState = atom({
   default: 15,
 });
 
-export const todoState = atom<string[]>({
+export const todoState = atom<{ content: string; isDone: boolean }[]>({
   key: "TodoList",
   default: [],
 });
