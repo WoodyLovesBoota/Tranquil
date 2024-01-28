@@ -9,6 +9,8 @@ import Timer from "./components/Timer";
 import { useEffect } from "react";
 import RainBg from "./components/backgrounds/RainBg";
 import Todo from "./components/Todo";
+import SunshineBg from "./components/backgrounds/SunshineBg";
+import SunshineBgTwo from "./components/backgrounds/SunBgTwo";
 
 function App() {
   const weather = useRecoilValue(weatherState);
@@ -38,6 +40,8 @@ function App() {
         <RainBg />
       ) : Math.floor(weather[0] / 100) === 6 ? (
         <SnowBg />
+      ) : weather[0] === 800 ? (
+        <SunshineBgTwo />
       ) : null}
       <Container>
         <Header />

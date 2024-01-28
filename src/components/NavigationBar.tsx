@@ -19,7 +19,7 @@ const NavigationBar = () => {
           }}
           isnow={isNow === 0 ? "true" : "false"}
         >
-          home
+          HOME
         </Item>
         <Item
           onClick={() => {
@@ -27,7 +27,7 @@ const NavigationBar = () => {
           }}
           isnow={isNow === 1 ? "true" : "false"}
         >
-          todo
+          TODO
         </Item>
         <Item
           onClick={() => {
@@ -35,7 +35,7 @@ const NavigationBar = () => {
           }}
           isnow={isNow === 2 ? "true" : "false"}
         >
-          focus
+          FOCUS
         </Item>
       </List>
     </Wrapper>
@@ -61,7 +61,7 @@ const List = styled.div`
 `;
 
 const Item = styled.h2<{ isnow: string }>`
-  font-size: ${(props) => (props.isnow === "true" ? 16 : 12)}px;
+  font-size: ${(props) => (props.isnow === "true" ? 16 : 10)}px;
   font-weight: ${(props) => (props.isnow === "true" ? 400 : 300)};
   color: ${(props) => (props.isnow === "true" ? "white" : "white")};
   letter-spacing: 1px;

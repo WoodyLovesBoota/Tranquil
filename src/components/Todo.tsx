@@ -3,6 +3,8 @@ import styled from "styled-components";
 import { useForm } from "react-hook-form";
 import { useRecoilState } from "recoil";
 import { todoState } from "../atoms";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCheck, faX } from "@fortawesome/free-solid-svg-icons";
 
 const Todo = () => {
   const { register, handleSubmit, getValues, setValue } = useForm<IForm>();
@@ -22,7 +24,6 @@ const Todo = () => {
   };
 
   const onCheckClick = (keyword: string) => {
-    // TODO : add check logic
     setTodo((prev) => {
       let index = prev.findIndex((e) => e.content === keyword);
       let target = [...prev][index];
@@ -37,21 +38,50 @@ const Todo = () => {
           <Input {...register("keyword", { required: true, minLength: 1 })} placeholder="Add Todo" autoComplete="off" />
         </Form>
         <TodoList>
-          {todo.map((e, i) => (
-            <TodoElement key={i} variants={todoElementVar} initial="initial" animate="animate">
-              <TodoMain>
-                <TodoCheck onClick={() => onCheckClick(e.content)}></TodoCheck>
-                <TodoContent>{e.content}</TodoContent>
-              </TodoMain>
-              <TodoButton
-                onClick={() => {
-                  onDeleteClick(e.content);
-                }}
-              >
-                X
-              </TodoButton>
-            </TodoElement>
-          ))}
+          {todo.map(
+            (e, i) =>
+              e.isDone === false && (
+                <TodoElement key={i} variants={todoElementVar} initial="initial" animate="animate">
+                  <TodoMain>
+                    <TodoCheck checked={"false"} onClick={() => onCheckClick(e.content)}>
+                      <FontAwesomeIcon icon={faCheck} />
+                    </TodoCheck>
+                    <TodoContent checked={"false"}>{e.content}</TodoContent>
+                  </TodoMain>
+                  <TodoButton
+                    onClick={() => {
+                      onDeleteClick(e.content);
+                    }}
+                  >
+                    <FontAwesomeIcon icon={faX} />
+                  </TodoButton>
+                </TodoElement>
+              )
+          )}
+        </TodoList>
+      </Container>
+      <Container variants={todoVar} initial="initial" animate="animate">
+        <TodoList>
+          {todo.map(
+            (e, i) =>
+              e.isDone === true && (
+                <TodoElement key={i} variants={todoElementVar} initial="initial" animate="animate">
+                  <TodoMain>
+                    <TodoCheck checked={"true"} onClick={() => onCheckClick(e.content)}>
+                      <FontAwesomeIcon icon={faCheck} />
+                    </TodoCheck>
+                    <TodoContent checked={"true"}>{e.content}</TodoContent>
+                  </TodoMain>
+                  <TodoButton
+                    onClick={() => {
+                      onDeleteClick(e.content);
+                    }}
+                  >
+                    <FontAwesomeIcon icon={faX} />
+                  </TodoButton>
+                </TodoElement>
+              )
+          )}
         </TodoList>
       </Container>
     </Wrapper>
@@ -67,9 +97,9 @@ const Wrapper = styled.div`
   top: 0;
   left: 0;
   display: flex;
-  flex-direction: column;
   justify-content: center;
   align-items: center;
+  z-index: 2;
 `;
 
 const Container = styled(motion.div)`
@@ -80,8 +110,9 @@ const Container = styled(motion.div)`
   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
   backdrop-filter: blur(3px);
   width: 400px;
-  height: 600px;
+  height: 400px;
   padding: 40px;
+  margin: 0 20px;
 `;
 
 const Form = styled.form`
@@ -98,11 +129,15 @@ const Input = styled.input`
   &:focus {
     outline: none;
   }
+  &::placeholder {
+    color: white;
+  }
 `;
 
 const TodoList = styled.div`
   width: 100%;
   margin-top: 20px;
+  overflow: scroll;
 `;
 
 const TodoElement = styled(motion.div)`
@@ -117,21 +152,31 @@ const TodoMain = styled.div`
   align-items: center;
 `;
 
-const TodoCheck = styled.button`
-  background-color: transparent;
-  width: 10px;
-  height: 10px;
-  border: 1px solid white;
+const TodoCheck = styled.button<{ checked: string }>`
+  font-size: 8px;
+  width: 18px;
+  height: 18px;
+  font-weight: 400;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 100px;
+  border: 1px solid ${(props) => (props.checked === "true" ? "#666" : "white")};
+  background-color: ${(props) => (props.checked === "true" ? "#666" : "transparent")};
   margin-right: 10px;
+  cursor: pointer;
 `;
 
-const TodoContent = styled.h2`
+const TodoContent = styled.h2<{ checked: string }>`
   font-weight: 300;
+  color: ${(props) => (props.checked === "true" ? "#666" : "white")};
+  text-decoration: ${(props) => (props.checked === "true" ? "line-through" : "none")};
 `;
 
 const TodoButton = styled.button`
   background-color: transparent;
   cursor: pointer;
+  font-size: 10px;
 `;
 
 const todoVar = {
