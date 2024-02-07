@@ -1,6 +1,5 @@
-import styled from "styled-components";
 import { useQuery } from "react-query";
-import { ILocationData, IWeatherData, fetchCityData, fetchWeatherData } from "../api";
+import { ILocationData, IWeatherData, fetchWeatherData } from "../api";
 import { useEffect, useState } from "react";
 import { useRecoilState } from "recoil";
 import { tempState, weatherState } from "../atoms";
@@ -44,9 +43,7 @@ const Weather = () => {
     data && setTemp(data.main.temp - 273.15);
   }, [data]);
 
-  return <Wrapper></Wrapper>;
+  return <div></div>;
 };
 
 export default Weather;
-
-const Wrapper = styled.div``;
